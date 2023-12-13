@@ -31,7 +31,6 @@ if [ -f /etc/os-release ]; then
          exit
        ;;
     esac
-    
   else
     if [ $(arch) == 'aarch64' ]; then
       echo 'This script must be run from a x86 host machine'
@@ -42,22 +41,22 @@ if [ -f /etc/os-release ]; then
     fi
   fi
 else
-    echo 'WARNING: This does not appear to be an Ubuntu machine. The script is targeted for Ubuntu, and may not work with other distributions.'
-    read -p 'Continue with installation (Y/n)? ' answer
-    case ${answer:0:1} in
-       y|Y )
-         echo Yes
-       ;;
-       * )
-         exit
-       ;;
-    esac
+  echo 'WARNING: This does not appear to be an Ubuntu machine. The script is targeted for Ubuntu, and may not work with other distributions.'
+  read -p 'Continue with installation (Y/n)? ' answer
+  case ${answer:0:1} in
+    y|Y )
+      echo Yes
+    ;;
+    * )
+      exit
+    ;;
+  esac
 fi
 
 if [[ ! -d $LINUX_FOR_TEGRA_DIRECTORY ]] ; then
-   echo "Could not find the Linux_for_Tegra folder."
-   echo "Please download the Jetson sources and ensure they are in $JETSON_FOLDER/Linux_for_Tegra"
-   exit 1
+  echo "Could not find the Linux_for_Tegra folder."
+  echo "Please download the Jetson sources and ensure they are in $JETSON_FOLDER/Linux_for_Tegra"
+  exit 1
 fi
 
 function check_board_setup
@@ -77,7 +76,7 @@ function check_board_setup
     echo "a USB port and in Force Recovery Mode"
     exit 1
   else
-    if [[ $FLASH_BOARDID == *"jetson-agx-xavier-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
+    if [[ $FLASH_BOARDID == *"jetson-agx-xavier-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-agx-orin-devkit"* ]] ; then
       echo "$FLASH_BOARDID" | grep found
       if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
         read -p "Make sure the SD card and the force recovery jumper are removed. Continue (Y/n)? " answer
