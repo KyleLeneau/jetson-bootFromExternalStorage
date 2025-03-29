@@ -11,7 +11,8 @@
 # Next, check the architecture to make sure it's not aarch64, not a Jetson
 
 #JETSON_FOLDER=R35.4.1
-JETSON_FOLDER=R36.2.0
+# JETSON_FOLDER=R36.2.0
+JETSON_FOLDER=R36.4.3
 
 function help_func
 {
@@ -77,17 +78,18 @@ cd $JETSON_FOLDER
 
 # Made it this far, we're ready to start the downloads
 
-# Get the 36.2.0 Tegra system
+# Get the 36.4.3 Tegra system
 # Get the L4T Driver Package - BSP
-wget -N https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/release/jetson_linux_r36.2.0_aarch64.tbz2
+wget -N https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.3/release/Jetson_Linux_r36.4.3_aarch64.tbz2
+
 # Get the Sample Root File System (rootfs)
-wget -N https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/release/tegra_linux_sample-root-filesystem_r36.2.0_aarch64.tbz2
+wget -N https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.3/release/Tegra_Linux_Sample-Root-Filesystem_r36.4.3_aarch64.tbz2
 
 # Unpack the files, creating the Linux_for_Tegra folder
-sudo tar -xpvf jetson_linux_r36.2.0_aarch64.tbz2
+sudo tar -xpvf Jetson_Linux_r36.4.3_aarch64.tbz2
 
 cd Linux_for_Tegra/rootfs/
-sudo tar -xpvf ../../tegra_linux_sample-root-filesystem_r36.2.0_aarch64.tbz2
+sudo tar -xpvf ../../Tegra_Linux_Sample-Root-Filesystem_r36.4.3_aarch64.tbz2
 cd ../..
 cd Linux_for_Tegra/
 
@@ -100,5 +102,6 @@ fi
 
 # Copy NVIDIA user space libraries into target file system
 sudo ./apply_binaries.sh
+
 # Install the prerequisite dependencies for flashing
 sudo ./tools/l4t_flash_prerequisites.sh
